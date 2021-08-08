@@ -1,0 +1,162 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+
+*
+{
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins';
+}
+body
+{
+    width: 100%;
+    height: 100%;
+}
+.top_nav_bar
+{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 3px solid #1e90ff;
+    width: 100%;
+    height: 50px;
+}
+.logoNsearch
+{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 3px solid #1e90ff;
+}
+.logoNsearch .side-menu-icon
+{
+    color: #1e90ff;
+    font-size: 1.5em;
+    display: none;
+}
+.logoNsearch .logo-side h2
+{
+    font-family: 'Lobster Two';
+    color: #1e90ff;
+    margin-left: 5px;
+}
+.logoNsearch .search-side
+{
+    border: 2px solid #1e90ff;
+    padding: 5px 10px;
+    border-radius: 15px;
+    height: 30px;
+    width: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.logoNsearch .search-side input
+{
+    background: none;
+    border: none;
+    outline: none;
+    color: #FF2F2F;
+    padding: 4px;
+    width: 90%;
+    font-family: 'Lobster Two';
+    font-size: 1em;
+}
+.logoNsearch .search-side .fa
+{
+    font-size: 1em;
+    color: #FF2F2F;
+}
+.img-part
+{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+.img-part img
+{
+    width: 200px;
+}
+.primary-info
+{
+    width: 80%;
+    margin: 0 auto;
+    padding-top: 15px;
+}
+.primary-info h2
+{
+    text-align: center;
+    font-size: 1.8em;
+    font-weight: 400;
+}
+.primary-info .stocks
+{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+}
+.primary-info .stocks h4
+{
+    font-weight: 400;
+    text-align: center;
+    font-size: 18px;
+    display: inline-block;
+}
+.primary-info .stocks h4 span
+{
+    font-weight: 500;
+    color: #f42d00;
+    font-size: 18px;
+}
+.primary-info .stocks h5
+{
+    font-weight: 500;
+    text-align: center;
+    display: inline-block;
+    color: #f42d00;
+    font-size: 18px;
+}
+.primary-info p
+{
+    font-style: italic;
+    text-align: justify;
+}
+.buttons
+{
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+}
+
+.buttons button
+{
+    margin: 0 5px;
+    width: 100%;
+}
+@media only screen and (max-width: 600px) 
+{
+    .primary-info
+    {
+        width: 90%;
+    }
+    .buttons
+    {
+        width: 90%;
+    }
+}
+
+
+
+
+
+
+
+

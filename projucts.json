@@ -1,0 +1,51 @@
+[
+    {
+        "product_id": "2",
+        "product_name": "Afride's pic",
+        "price": "5000",
+        "stock": "20",
+        "product_img": "images\/afride_cover.jpg"
+    },
+    {
+        "product_id": "3",
+        "product_name": "Flower pot",
+        "price": "400",
+        "stock": "30",
+        "product_img": "images\/wooden flower pot.jpg"
+    },
+    {
+        "product_id": "4",
+        "product_name": "creative table clock",
+        "price": "600",
+        "stock": "30",
+        "product_img": "images\/creative table clock.webp"
+    },
+    {
+        "product_id": "5",
+        "product_name": "wooden pen box",
+        "price": "300",
+        "stock": "20",
+        "product_img": "images\/wooden pen box.jpg"
+    },
+    {
+        "product_id": "6",
+        "product_name": "wooden photoframe",
+        "price": "400",
+        "stock": "30",
+        "product_img": "images\/wooden photoframe.jpg"
+    },
+    {
+        "product_id": "7",
+        "product_name": "creative wall clock",
+        "price": "700",
+        "stock": "30",
+        "product_img": "images\/wooden wall clock.jpg"
+    },
+    {
+        "product_id": "8",
+        "product_name": "horse sculpture",
+        "price": "2000",
+        "stock": "10",
+        "product_img": "images\/horse sculpture.jpg"
+    }
+]

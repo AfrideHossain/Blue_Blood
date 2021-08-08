@@ -1,0 +1,226 @@
+*
+{
+    margin: 0;
+    padding: 0;
+}
+.profileNshort
+{
+    display: flex;
+    width: 700px;
+    justify-content: space-around;
+    padding: 5%;
+    margin: 0 auto;
+}
+.imageSec img
+{
+    width: 200px;
+    border-radius: 50%;
+}
+.short 
+{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+.short h2{
+    font-size: 1.5em;
+    font-weight: 600;
+    font-family: "Quicksand";
+}
+.short h4{
+    font-size: .9em;
+    color: rgb(255, 115, 0);
+    font-weight: 400;
+}
+
+.user_address_box
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 700px;
+    padding: 5%;
+    margin: 0 auto;
+}
+
+.user_address_box .address_box_title
+{
+    width: 100%;
+    height: auto;
+    padding: 5px 0;
+    background: rgba(255, 0, 0, 0.1);
+    border: 1px solid rgba(255, 0, 0, 0.5);
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+.address_box_title p
+{
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    font-size: .8em;
+}
+.user_address
+{
+    width: 100%;
+}
+.data_pair
+{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    /* align-items: center; */
+    background: rgba(59, 59, 59, 0.1);
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 1px solid rgba(59, 59, 59, 0.5);
+    margin: 5px 0;
+}
+.data_pair p
+{
+    width: 100%;
+    margin: 0 auto;
+    text-align: left;
+}
+.data_pair p:nth-child(2)
+{
+    /* background: rgba(0, 255, 0, 0.39); */
+    background: rgba(255, 115, 0, 0.8);
+    border-radius: 5px;
+    color: #fff;
+    text-align: left;
+    padding: 0 10px;
+    /* color: rgb(255, 115, 0); */
+}
+.pass_change_box
+{
+    display: none;
+    position: absolute;
+    top: 55px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+    background: #fff;
+    width: 300px;
+    height: auto;
+    padding: 20px 10px;
+    border-radius: 10px;
+    box-shadow: 0px 5px 8px 3px rgba(0, 0, 0, 0.2);
+}
+.fade_down
+{
+    animation: fade_down 1s;
+}
+.fade_up
+{
+    animation: fade_up 1s;
+}
+@keyframes fade_down {
+    0%{
+        opacity: 0;
+        top: -50%;
+    }
+    100%{
+        opacity: 1;
+        top: 55px;
+    }
+}
+@keyframes fade_up {
+    0%{
+        opacity: 1;
+        top: 55px;
+    }
+    100%{
+        opacity: 0;
+        top: -50%;
+    }
+}
+.pass_change_box #close_pass_box
+{
+    position: absolute;
+    top: 0;
+    right: 0px;
+    margin: 5px;
+    background: #FF2F2F;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.pass_change_box #close_pass_box:hover
+{
+    background: #df0000;
+}
+.pass_change_box .pass_change_elements
+{
+    margin-top: 10px;
+    padding: 10px;
+    width: 100%;
+
+}
+.pass_change_elements p
+{
+    font-weight: 500;
+    color: rgb(255, 115, 0);
+    line-height: 1em;
+    font-size: 1.1em;
+    margin-bottom: 10px;
+}
+.pass_change_elements input
+{
+    width: 100%;
+    height: 35px;
+    border-radius: 5px;
+    background: #f6f6f6;
+    border: 1px solid #00e0ff;
+    color: #303030;
+    padding: 0 5px;
+    margin-bottom: 10px;
+    font-size: .9em;
+}
+.pass_change_elements input::placeholder
+{
+    font-size: .9em;
+    color: #7a7a7a;
+}
+.pass_change_elements button
+{
+    position: relative;
+    left: 100%;
+    transform: translateX(-100%);
+}
+
+@media only screen and (max-width: 600px) 
+{
+    .profileNshort
+    {
+        width: 100%;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .imageSec
+    {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 10px;
+    }
+    .short
+    {
+        align-items: center;
+    }
+    .user_address_box
+    {
+        width: 90vw;
+        padding: 10px;
+    }
+    .pass_change_box
+    {
+        width: 90vw;
+    }
+}
