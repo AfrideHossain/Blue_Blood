@@ -193,6 +193,12 @@
                 name: "vase",
                 price: 400,
                 quant: 1
+            },
+            {
+                id: "#113",
+                name: "Horse Sculpture",
+                price: 2000,
+                quant: 1
             }
         ];
         /*var objstr = JSON.stringify(cart);
