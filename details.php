@@ -82,8 +82,8 @@ if (isset($_GET["product"])) {
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate</p>
         </div>
         <div class="buttons">
-            <button class="btn btn-success">Buy Now</button>
-            <button class="btn btn-primary">Add To Cart</button>
+            <button id="buyBtn" class="btn btn-success">Buy Now</button>
+            <button id="cartBtn" class="btn btn-primary">Add To Cart</button>
         </div>
     </section>
     <!--Top Navigation Bar End-->
@@ -126,22 +126,28 @@ if (isset($_GET["product"])) {
             </p>
         </section>
     </footer>
-    <!-- <script type="text/javascript">
-            const openMenuBtn = document.getElementById("open-menu");
-            const closeMenuBtn = document.getElementById("close-menu");
-            const sideMenu = document.getElementById("side-menu");
+    <script type="text/javascript">
+        const cartBtn = document.getElementById("cartBtn");
 
-            function openMenu() {
-                openMenuBtn.style.display = "none"
-                closeMenuBtn.style.display = "block"
-                sideMenu.style.display = "block"
-            }
-            function closeMenu() {
-                openMenuBtn.style.display = "block"
-                closeMenuBtn.style.display = "none"
-                sideMenu.style.display = "none"
-            }
-        </script> -->
+        cartBtn.onclick = function(){
+            console.log("clicked");
+            let func = <?php addToCart($product); ?>
+        }
+    </script>
 </body>
 
 </html>
+<?php
+function addToCart($product)
+{
+    $cookie_arr = $_COOKIE["cart"];
+    if (sizeof($cookie_arr) > 0) {
+        $last_key = sizeof($cookie_arr);
+        setcookie("cart[$last_key]", $product, time() + 86400, "/");
+    } else {
+        setcookie("cart[0]", $product, time() + 86400, "/");
+    }
+    return "done";
+    
+}
+?>
