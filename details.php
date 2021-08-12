@@ -19,6 +19,7 @@ if (isset($_GET["product"])) {
         $product = mysqli_fetch_assoc($result);
         // print_r($product);
         // echo $product["product_img"];
+        $product_json = json_encode($product);
     } else {
         echo "<script>window.location.href = 'index.php';</script>";
     }
@@ -126,11 +127,25 @@ if (isset($_GET["product"])) {
             </p>
         </section>
     </footer>
+    <h2 id="test_elm"></h2>
     <script type="text/javascript">
         const cartBtn = document.getElementById("cartBtn");
+        const test_elm = document.getElementById("test_elm")
+        var json_product = <?php echo $product_json; ?>;
 
         cartBtn.onclick = function(){
             console.log("clicked");
+            let jsonProductString = JSON.stringify(json_product);
+            //test_elm.innerHTML = jsonProductString;
+            let xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = ()=>{
+                if (this.readyState == 4 && this.status == 200) {
+                    console.log(this.responseText);
+                }
+            }
+            xhr.open("POST", "addcart.php", true);
+            xhr.setRequestHeader("Content-type", "application/json");
+            xhr.send(jsonProductString);            
         }
     </script>
 </body>
