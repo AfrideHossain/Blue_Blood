@@ -95,6 +95,11 @@
                         <th>Price</th>
                         <th>Quantity</th>
                     </tr>
+                    <?php
+                    if(!isset($_COOKIE["cart"])){
+                        echo "<tr><p class='errMsg'>Your cart is empty now</p></tr><script>document.getElementById('order_table').style.display = 'none';</script>";
+                    }
+                    ?>
                     <!--<tr>
                                             <td class="pid">#111</td>
                                             <td class="pname">Clock</td>
@@ -232,7 +237,8 @@
                     const input = document.createElement("input");
                     input.setAttribute('type', 'number');
                     input.setAttribute('class', 'quant');
-                    input.setAttribute('value', obj.quant);
+                    input.setAttribute('value', 1);
+                    //input.setAttribute('value', obj.quant);
                     input.setAttribute('oninput', "change(" + val + ")");
                     td.appendChild(input);
                     tr.appendChild(td);
@@ -295,6 +301,9 @@
             let c = 0;
             while (c < cart.length) {
                 cart.pop();
+                // document.cookie = "cart["+c+"]="+";max-age=0";
+                //document.cookie = "cart=";
+                c++;
             }
             let errTag = document.createElement("p");
             errTag.setAttribute('class', 'errMsg');
