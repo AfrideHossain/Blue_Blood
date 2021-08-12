@@ -1,4 +1,5 @@
 <?php
+$jsonStr = file_get_contents("php://input");
 function addToCart($product)
 {
     $cookie_arr = $_COOKIE["cart"];
