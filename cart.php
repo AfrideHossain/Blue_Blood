@@ -176,7 +176,7 @@
             cart_main.style.display = "block";
         }
 
-        var cart = [{
+        /*var cart = [{
                 id: "#111",
                 name: "clock",
                 price: 300,
@@ -200,7 +200,13 @@
                 price: 2000,
                 quant: 1
             }
-        ];
+        ];*/
+        var cart = [];
+        let cart_json = <?php echo json_encode($_COOKIE["cart"]); ?>;
+        for (let elm = 0; elm < cart_json.length; elm++) {
+            cart.push(JSON.parse(cart_json[elm]));
+        }
+        //let cart = cart_json.split("%");
         /*var objstr = JSON.stringify(cart);
         var obj = JSON.parse(objstr);
         console.log(obj[0].name);
@@ -232,12 +238,12 @@
                     tr.appendChild(td);
                 } else if (i == 0) {
                     td.setAttribute('class', 'id');
-                    const txt = document.createTextNode(obj.id);
+                    const txt = document.createTextNode(obj.product_id);
                     td.appendChild(txt);
                     tr.appendChild(td);
                 } else if (i == 1) {
                     td.setAttribute('class', 'name');
-                    const txt = document.createTextNode(obj.name);
+                    const txt = document.createTextNode(obj.product_name);
                     td.appendChild(txt);
                     tr.appendChild(td);
                 } else if (i == 2) {
