@@ -6,6 +6,7 @@ if (!$_COOKIE["loggedin"] == 1) {
 } else {
     $_SESSION["user_id"] = $_COOKIE["user_id"];
     $_SESSION["loggedin"] = 1;
+    setcookie("cart[]", "", time()+86400, "/");
 }
 
 ?>

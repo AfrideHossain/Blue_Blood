@@ -138,11 +138,6 @@ if (isset($_GET["product"])) {
             let jsonProductString = JSON.stringify(json_product);
             //test_elm.innerHTML = jsonProductString;
             let xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = ()=>{
-                if (this.readyState == 4 && this.status == 200) {
-                    console.log(this.responseText);
-                }
-            }
             xhr.open("POST", "addcart.php", true);
             xhr.setRequestHeader("Content-type", "application/json");
             xhr.send(jsonProductString);            

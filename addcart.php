@@ -12,4 +12,7 @@ function addToCart($product)
     return "done";
     
 }
+//$jsonObj = json_decode($jsonStr);
+$resp = addToCart($jsonStr);
+echo $resp;
 ?>
