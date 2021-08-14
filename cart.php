@@ -86,7 +86,7 @@
         <a href="user.php" id="user-avatar" class="user-avatar"><i class="fa fa-user-o"></i></a>
         <div class="cart_main" id="cart_main">
             <span id="clear_cart" class="clear_cart"><i class="fa fa-trash-o"></i></span>
-            <h2>Your Cart</h2>
+            <h2>Shopping Cart</h2>
             <div id="order_details" class="order_details">
                 <table id="order_table">
                     <tr>
@@ -97,7 +97,7 @@
                     </tr>
                     <?php
                     if(!isset($_COOKIE["cart"])){
-                        echo "<tr><p class='errMsg'>Your cart is empty now</p></tr><script>document.getElementById('order_table').style.display = 'none';</script>";
+                        echo "<tr><p class='errMsg'>Cart is empty now</p></tr><script>document.getElementById('order_table').style.display = 'none';</script>";
                     }
                     ?>
                     <!--<tr>
@@ -115,7 +115,7 @@
                 </table>
                 <div class="total_price">
                     <p>
-                        Total: <span id="total_price">700</span>/=
+                        Total: <span id="total_price">0</span>/=
                     </p>
                     <button class="btn btn-success" id="order_btn">Order</button>
                 </div>
@@ -306,6 +306,9 @@
                 // document.cookie = `cart=`;
                 c++;
             }
+            const clear_cart_mod = new XMLHttpRequest();
+            clear_cart_mod.open("GET", "clearcart.php", true);
+            clear_cart_mod.send();
             let errTag = document.createElement("p");
             errTag.setAttribute('class', 'errMsg');
             let errTagMsg = document.createTextNode("Cart is empty now.");
