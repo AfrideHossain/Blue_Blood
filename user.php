@@ -31,7 +31,7 @@ if (!$_COOKIE["loggedin"] == 1) {
                                     </div> -->
             <div class="logo-side">
                 <!--<img src="images/logo2.png" alt="" />-->
-                <h2>BlueBlood</h2>
+                <h2 onclick="home()">BlueBlood</h2>
             </div>
             <div class="search-side">
                 <input type="text" name="search_word" id="searchBox" />
@@ -199,14 +199,19 @@ if (!$_COOKIE["loggedin"] == 1) {
                 }
             };
             let pass_json = {
-                npass : new_pass
+                npass: new_pass
             }
             pass_json = JSON.stringify(pass_json);
             //console.log(pass_json);
-            
+
             xhr.open("POST", "passcng.php", true);
             xhr.setRequestHeader("Content-type", "application/json");
             xhr.send(pass_json);
+        }
+    </script>
+    <script>
+        function home() {
+            window.location.href = "index.php";
         }
     </script>
 </body>

@@ -55,7 +55,7 @@ if (isset($_GET["product"])) {
                         </div> -->
             <div class="logo-side">
                 <!--<img src="images/logo2.png" alt="" />-->
-                <h2>BlueBlood</h2>
+                <h2 onclick="home()">BlueBlood</h2>
             </div>
             <div class="search-side">
                 <input type="text" name="search_word" id="searchBox" />
@@ -141,6 +141,11 @@ if (isset($_GET["product"])) {
             xhr.open("POST", "addcart.php", true);
             xhr.setRequestHeader("Content-type", "application/json");
             xhr.send(jsonProductString);            
+        }
+    </script>
+    <script>
+        function home() {
+            window.location.href = "index.php";
         }
     </script>
 </body>

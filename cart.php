@@ -1,3 +1,13 @@
+<?php
+// include "config/dbcon.php";
+session_start();
+if (!$_COOKIE["loggedin"] == 1) {
+    echo "<script>window.location.href = 'login/login.php';</script>";
+} else {
+    $_SESSION["user_id"] = $_COOKIE["user_id"];
+    $_SESSION["loggedin"] = 1;
+}
+?>
 <!DOCTYPE html>
 <html>
 
@@ -37,7 +47,7 @@
                                     </div> -->
             <div class="logo-side">
                 <!--<img src="images/logo2.png" alt="" />-->
-                <h2>BlueBlood</h2>
+                <h2 onclick="home()">BlueBlood</h2>
             </div>
             <div class="search-side">
                 <input type="text" name="search_word" id="searchBox" />
@@ -324,6 +334,11 @@
             order_btn.disabled = true;
             order_btn.style.backgroundColor = "rgba(189,189,189,0.998)"
             order_btn.style.borderColor = "rgba(189,189,189,0.998)"
+        }
+    </script>
+    <script>
+        function home() {
+            window.location.href = "index.php";
         }
     </script>
 </body>
