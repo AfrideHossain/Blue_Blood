@@ -302,7 +302,8 @@
             while (c < cart.length) {
                 cart.pop();
                 // document.cookie = "cart["+c+"]="+";max-age=0";
-                //document.cookie = "cart=";
+                // document.cookie = "cart["+c+"]=;max-age=0";
+                // document.cookie = `cart=`;
                 c++;
             }
             let errTag = document.createElement("p");
