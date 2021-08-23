@@ -71,7 +71,7 @@ if (isset($_GET["product"])) {
                 </div> -->
     </header>
     <section class="container">
-        <a href="user.php" id="user-avatar" class="user-avatar"><i class="fa fa-user-o"></i></a>
+        <a href="cart.php" id="cart-avatar" class="cart-avatar"><i class="fa fa-shopping-cart"></i></a>
         <div class="img-part">
             <img src="<?php echo $product["product_img"]; ?>" alt="" />
         </div>
