@@ -62,6 +62,24 @@ if (!$_COOKIE["loggedin"] == 1) {
                             </ul>
                         </div> -->
     </header>
+    <?php
+    include_once "config/dbcon.php";
+    $uid = $_SESSION["user_id"];
+    // $get_sql = "SELECT * FROM user_info WHERE user_id = '$_SESSION["user_id"]'";
+    $get_sql = "SELECT * FROM user_info WHERE user_id = '$uid'";
+    $result = mysqli_query($conn, $get_sql);
+    if (mysqli_num_rows($result) > 0) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            // $userJson = json_encode($row);
+            $userJson = $row;
+        }
+        // print_r($userJson);
+    } else {
+        echo "<script>
+        console.error(" . mysqli_error($conn) . ")
+    </script>";
+    }
+    ?>
     <div id="delivery_box" class="delivery_box">
         <div id="close_shipping"><span>&#x2715</span></div>
         <div class="box_title">
@@ -69,20 +87,20 @@ if (!$_COOKIE["loggedin"] == 1) {
         </div>
         <div class="get_address">
             <div class="input_pair">
-                <input type="text" name="name" id="name" placeholder="Full name" required />
-                <input type="tel" name="phone" id="phone" placeholder="Phone Number" required />
+                <input type="text" name="name" id="name" placeholder="Full name" value="<?php echo $userJson["username"] ?>" required />
+                <input type="tel" name="phone" id="phone" placeholder="Phone Number" value="<?php echo $userJson["prime_phone"] ?>" required />
             </div>
             <div class="input_pair">
-                <input type="tel" name="alt_phone" id="alt_phone" placeholder="Alternative Phone" required />
-                <input type="email" name="email" id="email" placeholder="Email" required />
+                <input type="tel" name="alt_phone" id="alt_phone" placeholder="Alternative Phone" value="<?php echo $userJson["alt_phone"] ?>" required />
+                <input type="email" name="email" id="email" placeholder="Email" value="<?php echo $userJson["email"] ?>" required />
             </div>
             <div class="input_pair">
-                <input type="text" name="village" id="village" placeholder="Village" required />
-                <input type="text" name="area" id="area" placeholder="Area" required />
+                <input type="text" name="village" id="village" placeholder="Village" value="<?php echo $userJson["village"] ?>" required />
+                <input type="text" name="area" id="area" placeholder="Area" value="<?php echo $userJson["area"] ?>" required />
             </div>
             <div class="input_pair">
-                <input type="text" name="district" id="district" placeholder="District" value="Rajbari" required />
-                <input type="text" name="country" id="country" placeholder="Country" value="Bangladesh" required />
+                <input type="text" name="district" id="district" placeholder="District" value="<?php echo $userJson["district"] ?>" required />
+                <input type="text" name="country" id="country" placeholder="Country" value="<?php echo $userJson["country"] ?>" required />
             </div>
             <div class="confirm_box">
                 <p>Cash on delivery</p>
@@ -106,7 +124,7 @@ if (!$_COOKIE["loggedin"] == 1) {
                         <th>Quantity</th>
                     </tr>
                     <?php
-                    if(!isset($_COOKIE["cart"])){
+                    if (!isset($_COOKIE["cart"])) {
                         echo "<tr><p class='errMsg'>Cart is empty now</p></tr><script>document.getElementById('order_table').style.display = 'none';</script>";
                     }
                     ?>
@@ -339,6 +357,10 @@ if (!$_COOKIE["loggedin"] == 1) {
     <script>
         function home() {
             window.location.href = "index.php";
+        }
+        const confirm_shipping = document.getElementById("confirm_shipping");
+        confirm_shipping.onclick = () => {
+            console.log("confirmed");
         }
     </script>
 </body>
