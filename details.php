@@ -71,6 +71,7 @@ if (isset($_GET["product"])) {
                 </div> -->
     </header>
     <section class="container">
+        <a href="user.php" id="user-avatar" class="user-avatar"><i class="fa fa-user-o"></i></a>
         <div class="img-part">
             <img src="<?php echo $product["product_img"]; ?>" alt="" />
         </div>
@@ -133,14 +134,14 @@ if (isset($_GET["product"])) {
         const test_elm = document.getElementById("test_elm")
         var json_product = <?php echo $product_json; ?>;
 
-        cartBtn.onclick = function(){
+        cartBtn.onclick = function() {
             console.log("clicked");
             let jsonProductString = JSON.stringify(json_product);
             //test_elm.innerHTML = jsonProductString;
             let xhr = new XMLHttpRequest();
             xhr.open("POST", "addcart.php", true);
             xhr.setRequestHeader("Content-type", "application/json");
-            xhr.send(jsonProductString);            
+            xhr.send(jsonProductString);
         }
     </script>
     <script>
@@ -162,6 +163,6 @@ if (isset($_GET["product"])) {
 //         setcookie("cart[0]", $product, time() + 86400, "/");
 //     }
 //     return "done";
-    
+
 // }
 ?>
