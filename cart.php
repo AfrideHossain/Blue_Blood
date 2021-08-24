@@ -358,9 +358,22 @@ if (!$_COOKIE["loggedin"] == 1) {
         function home() {
             window.location.href = "index.php";
         }
+
         const confirm_shipping = document.getElementById("confirm_shipping");
+        // shipping function
         confirm_shipping.onclick = () => {
-            console.log("confirmed");
+            let customer_info = {
+                name: document.getElementById("name").value,
+                phone: document.getElementById("phone").value,
+                altPhone: document.getElementById("alt_phone").value,
+                email: document.getElementById("email").value,
+                village: document.getElementById("village").value,
+                area: document.getElementById("area").value,
+                district: document.getElementById("district").value
+            }
+            customer_info = JSON.stringify(customer_info);
+            console.log(customer_info);
+            let xhr = new XMLHttpRequest();
         }
     </script>
 </body>
