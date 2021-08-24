@@ -62,6 +62,7 @@ if (!$_COOKIE["loggedin"] == 1) {
                             </ul>
                         </div> -->
     </header>
+    <p id="test_el"></p>
     <?php
     include_once "config/dbcon.php";
     $uid = $_SESSION["user_id"];
@@ -361,7 +362,7 @@ if (!$_COOKIE["loggedin"] == 1) {
 
         const confirm_shipping = document.getElementById("confirm_shipping");
         // shipping function
-        confirm_shipping.onclick = () => {
+        confirm_shipping.addEventListener("click", () => {
             let customer_info = {
                 name: document.getElementById("name").value,
                 phone: document.getElementById("phone").value,
@@ -369,23 +370,25 @@ if (!$_COOKIE["loggedin"] == 1) {
                 email: document.getElementById("email").value,
                 village: document.getElementById("village").value,
                 area: document.getElementById("area").value,
-                district: document.getElementById("district").value
+                district: document.getElementById("district").value,
+                cart: cart_json
             }
             customer_info = JSON.stringify(customer_info);
             console.log(customer_info);
-            let xhr = new XMLHttpRequest();
+            let xhrOrder = new XMLHttpRequest();
 
-            xhr.onreadystatechange = () => {
+            xhrOrder.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
-                    console.log("done");
+                    // console.log("done");
+                    document.getElementById("test_el").innerHTML = this.responseText;
                 }
-            }
+            };
 
-            xhr.setRequestHeader("Content-type", "application/json");
-            xhr.open("POST", "confirmorder.php", true);
-            xhr.send(customer_info);
+            xhrOrder.open("POST", "confirmorder.php", true);
+            xhrOrder.setRequestHeader("Content-type", "application/json");
+            xhrOrder.send(customer_info);
 
-        }
+        });
     </script>
 </body>
 
