@@ -374,6 +374,17 @@ if (!$_COOKIE["loggedin"] == 1) {
             customer_info = JSON.stringify(customer_info);
             console.log(customer_info);
             let xhr = new XMLHttpRequest();
+
+            xhr.onreadystatechange = () => {
+                if (this.readyState == 4 && this.status == 200) {
+                    console.log("done");
+                }
+            }
+
+            xhr.setRequestHeader("Content-type", "application/json");
+            xhr.open("POST", "confirmorder.php", true);
+            xhr.send(customer_info);
+
         }
     </script>
 </body>
