@@ -68,7 +68,7 @@ function sendmail($mailEngine, $toAddr, $mailSub, $mailBody)
         $mailEngine->Host = 'smtp.gmail.com';
         $mailEngine->SMTPAuth = true;
         $mailEngine->Username = 'maskfreedom093@gmail.com';
-        $mailEngine->Password = '/*SMTP Pass goes here*/';
+        $mailEngine->Password = 'AsdfQwer@#12'  /*SMTP Pass goes here*/;
         $mailEngine->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mailEngine->Port = '587';
         $mailEngine->setFrom('maskfreedom093@gmail.com');
