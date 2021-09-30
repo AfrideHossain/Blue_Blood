@@ -33,6 +33,25 @@ if (!$_COOKIE["loggedin"] == 1) {
             font-weight: 600;
             color: #c1c1c1;
         }
+
+        .msg-sec {
+            background-color: rgba(0, 0, 255, .2);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            min-height: 50px;
+            width: 320px;
+            margin: 0 auto;
+            padding: 5px;
+            border: 1px solid rgba(0, 0, 255, 1);
+            border-radius: 5px;
+        }
+
+        .msg-sec p {
+            line-height: 1;
+            margin: auto 0;
+            color: rgba(21, 21, 21, .8);
+        }
     </style>
 </head>
 
@@ -81,6 +100,9 @@ if (!$_COOKIE["loggedin"] == 1) {
     </script>";
     }
     ?>
+    <div class="msg-sec" id="msg-sec">
+        <p class="msg-content" id="msg-content">Your request is being processing...</p>
+    </div>
     <div id="delivery_box" class="delivery_box">
         <div id="close_shipping"><span>&#x2715</span></div>
         <div class="box_title">
@@ -324,7 +346,9 @@ if (!$_COOKIE["loggedin"] == 1) {
             total_price.innerHTML = total;
         }
 
-        clear_cart.onclick = function() {
+        clear_cart.onclick = cart_cleaner;
+
+        function cart_cleaner() {
             //console.log(order_table);
             order_table.style.display = "none";
             let c = 0;
@@ -335,7 +359,7 @@ if (!$_COOKIE["loggedin"] == 1) {
                 // document.cookie = `cart=`;
                 c++;
             }
-            const clear_cart_mod = new XMLHttpRequest();
+            let clear_cart_mod = new XMLHttpRequest();
             clear_cart_mod.open("GET", "clearcart.php", true);
             clear_cart_mod.send();
             let errTag = document.createElement("p");
@@ -361,6 +385,9 @@ if (!$_COOKIE["loggedin"] == 1) {
         }
 
         const confirm_shipping = document.getElementById("confirm_shipping");
+        const msg_sec = document.getElementById("msg-sec");
+        const msg_content = document.getElementById("msg-content");
+
         // shipping function
         confirm_shipping.addEventListener("click", () => {
             let customer_info = {
@@ -371,16 +398,21 @@ if (!$_COOKIE["loggedin"] == 1) {
                 village: document.getElementById("village").value,
                 area: document.getElementById("area").value,
                 district: document.getElementById("district").value,
-                cart: cart_json
+                cart: cart_json,
+                total: total_price.innerHTML
             }
             customer_info = JSON.stringify(customer_info);
-            console.log(customer_info);
+            //console.log(customer_info);
+            msg_sec.style.display = "flex";
             let xhrOrder = new XMLHttpRequest();
 
             xhrOrder.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
                     // console.log("done");
-                    document.getElementById("test_el").innerHTML = this.responseText;
+                    msg_content.innerHTML = this.responseText;
+                    cart_cleaner();
+                    delivery_box.style.display = "none";
+                    cart_main.style.display = "block";
                 }
             };
 

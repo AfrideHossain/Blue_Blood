@@ -1,5 +1,5 @@
 <?php
-// include "config/dbcon.php";
+include "config/dbcon.php";
 session_start();
 if (!$_COOKIE["loggedin"] == 1) {
   echo "<script>window.location.href = 'login/login.php';</script>";
@@ -12,10 +12,6 @@ if (!$_COOKIE["loggedin"] == 1) {
 <?php
 $customer = file_get_contents("php://input");
 $customer_info = json_decode($customer);
-// print_r($customer_info);
-// print_r($customer_info->cart);
-// print_r($customer_info->email);
-// Getting customer info done
 
 //Mailer odject start
 use PHPMailer\PHPMailer\PHPMailer;
@@ -34,20 +30,12 @@ function input_tester($data)
   $data = htmlspecialchars($data);
   return $data;
 }
-//$mailer = new PHPMailer(true);
-$order_id = 35667365;
-// $cart_items = $customer_info->cart; //convert json to object
-// print_r($cart_items);
+
+$order_id = $_COOKIE["user_id"] . date("HisdmY");  //order Id
+//$order_id = intval($order_id);  //convert string to Int
+//echo $order_id;
+//echo gettype($order_id);
 $cart_items = $_COOKIE["cart"];
-//print_r($cart_items);
-//echo gettype($cart_items);
-/*$products_str = "<tr> <td> ID </td> <td> Product  </td> <td> Price </td></tr>"; //An empty string for adding products into mbody;
-for ($i = 0; $i > count($cart_items); $i++) {
-    //$products_str .= "<tr> <td>" . $items["product_id"] . "</td> <td>" . $items["product_name"] . "</td> <td>" . $items["price"] . "</td></tr>";
-    // echo $cart_items[$i];s
-    $item = json_decode($cart_items[$i]);
-    $products_str .= "<tr> <td>" . $item["product_id"] . "</td> <td>" . $item["product_name"] . "</td> <td>" . $item["price"] . "</td></tr>";
-}*/
 $html = "<style>
       .header
       {
@@ -90,10 +78,18 @@ $html = "<style>
         padding: 3px 0;
         text-align: center;
       }
+      .total
+      {
+        width: 6in;
+        display: flex;
+        justify-content: right;
+        color: rgb(255, 115, 0);
+      }
     </style>";
 $html .= "<div class='header'>
       <h2>BlueBlood</h2>
       <p>Order ID: <span>$order_id</span></p>
+      <p>Total Price: <span>$customer_info->total</span></p>
     </div>
     <div class='order_details'>
       <table>
@@ -104,21 +100,19 @@ $html .= "<div class='header'>
         </tr>";
 $cart_len = count($cart_items);
 $i = 0;
-// $n_cart = json_decode($cart_items);
 while ($i <= $cart_len - 1) {
   $item = json_decode($cart_items[$i]);
-  // echo $item->price . "<br>";
-  // echo gettype($item) . "<br>";
   $html .= "<tr> <td>" . $item->product_id . "</td> <td>" . $item->product_name . "</td> <td>" . $item->price . "</td></tr>";
   $i++;
 }
 $html .= "</table></div>";
 //echo $html;
 
-$mpdf = new \Mpdf\Mpdf(['format' => 'A4-L']);
+$mpdf = new \Mpdf\Mpdf();
 $mpdf->WriteHTML($html);
-$file = time() . ".pdf";
-$mpdf->Output($file, 'D');
+$fileName = "blueblood_" . $order_id . ".pdf";
+$file = "orders/" . $fileName;
+$mpdf->Output($file, 'F');
 
 // Email's body
 /*<span style='background: rgba(0,191,239,0.1); font-size: 1.2em; border: 1px solid #00b1dd; margin: 5px 0px; border-radius: 3px; padding: 10px 30px; margin: 10px 0px; font-weight: bold; text-align: center;'>$products_str
@@ -139,7 +133,6 @@ $mpdf->Output($file, 'D');
 //             <br>
 //             <p style='margin-top: 25px;'>Happy Journey</p>
 //         </div>";
-$flink = "http://127.0.0.1/blueblood/images/user_avatar.jpg";
 $mbody = "<div style='font-size: 1.2em; padding: 5px;'>
 
             <div style='border-bottom: 1px solid gray;'>
@@ -150,13 +143,11 @@ $mbody = "<div style='font-size: 1.2em; padding: 5px;'>
                 Hello $customer_info->name, <br><br>We have received your request. We will confirm the present status of your order in the return mail as soon as we confirm your order.
             </p>
             <br>
-            <a href='$flink'>download now</a>
-            <br>
-            <p style='margin-top: 25px;'>Happy Journey</p>
+            <p style='margin-top: 10px;'>Have a good day</p>
         </div>";
 $clientMailSub = "Product confirmation related.";
 //send mail function
-function sendmail($toAddr, $mailSub, $mailBody)
+function sendmail($toAddr, $mailSub, $mailBody, $file, $fileName)
 {
   $mailEngine = new PHPMailer(true);
   try {
@@ -170,16 +161,32 @@ function sendmail($toAddr, $mailSub, $mailBody)
     $mailEngine->Port = '587';
     $mailEngine->setFrom('maskfreedom093@gmail.com');
     $mailEngine->addAddress($toAddr);
+    $mailEngine->addAttachment($file, $fileName);
     $mailEngine->isHTML(true);
     $mailEngine->Subject = $mailSub;
     $mailEngine->Body = $mailBody;
     $mailEngine->send();
-    echo "Thanks for your contribution.";
+    //echo "Thanks for your contribution.<br>";
   } catch (Exception $e) {
     echo "An error occured while sending feedback.<br>";
     echo $e->getMessage();
   }
+  return true;
 }
+
+$uid = $_COOKIE["user_id"];
 $cmail = $customer_info->email;
-//sendmail($cmail, $clientMailSub, $mbody);
+$sql = "INSERT INTO orders (order_id, user_id, username, total_price, receipt_file) VALUES ('$order_id', '$uid', '$customer_info->name', '$customer_info->total', '$file')";
+if (mysqli_query($conn, $sql)) {
+  if (sendmail($cmail, $clientMailSub, $mbody, $file, $fileName)) {
+    echo "Your order has been placed successfully.";
+  }
+} else {
+  echo "An error occured.";
+}
+
+
+// $cmail = $customer_info->email;
+// sendmail($cmail, $clientMailSub, $mbody);
+// insertOrder($order_id, $_COOKIE["user_id"], $customer_info->name, $customer_info->total, $file, $fileName);
 ?>
