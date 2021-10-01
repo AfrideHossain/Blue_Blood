@@ -262,23 +262,8 @@ if (!$_COOKIE["loggedin"] == 1) {
         for (let elm = 0; elm < cart_json.length; elm++) {
             cart.push(JSON.parse(cart_json[elm]));
         }
-        //let cart = cart_json.split("%");
-        /*var objstr = JSON.stringify(cart);
-        var obj = JSON.parse(objstr);
-        console.log(obj[0].name);
-        obj[0].name = "Keyboard";
-        console.log(obj[0].name);
-        console.log(cart[0]);
-        cart[0].name = "Keyboard";*/
         const tr = document.createElement("tr");
         const td = document.createElement("td");
-        /*const tnode = document.createTextNode("this is a text node");
-        td.appendChild(tnode);
-        tr.appendChild(td);
-        order_table.appendChild(tr);
-        console.log(tr);
-        console.log(td);*/
-        //console.log(td);
         var val = 0;
         cart.forEach((obj) => {
             const tr = document.createElement("tr");
