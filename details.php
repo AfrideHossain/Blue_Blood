@@ -42,6 +42,22 @@ if (isset($_GET["product"])) {
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
     <title>BlueBlood | Ornament Your Haven</title>
+    <style>
+        #test_elm {
+            position: absolute;
+            width: 200px;
+            text-align: center;
+            background-color: rgba(0, 255, 0, 0.1);
+            border: 1px solid rgba(0, 200, 0, 1);
+            border-radius: 5px;
+            padding: 10px 0;
+            font-size: .9em;
+            margin-top: 5px;
+            left: 10px;
+            font-weight: 300;
+            display: none;
+        }
+    </style>
 </head>
 
 <body>
@@ -70,6 +86,7 @@ if (isset($_GET["product"])) {
                     </ul>
                 </div> -->
     </header>
+    <h2 id="test_elm"></h2>
     <section class="container">
         <a href="cart.php" id="cart-avatar" class="cart-avatar"><i class="fa fa-shopping-cart"></i></a>
         <div class="img-part">
@@ -128,7 +145,7 @@ if (isset($_GET["product"])) {
             </p>
         </section>
     </footer>
-    <h2 id="test_elm"></h2>
+    <!-- <h2 id="test_elm"></h2> -->
     <script type="text/javascript">
         const cartBtn = document.getElementById("cartBtn");
         const test_elm = document.getElementById("test_elm")
@@ -139,6 +156,12 @@ if (isset($_GET["product"])) {
             let jsonProductString = JSON.stringify(json_product);
             //test_elm.innerHTML = jsonProductString;
             let xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    test_elm.style.display = "block";
+                    test_elm.innerHTML = "Product added to cart";
+                }
+            }
             xhr.open("POST", "addcart.php", true);
             xhr.setRequestHeader("Content-type", "application/json");
             xhr.send(jsonProductString);
