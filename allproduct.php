@@ -9,26 +9,7 @@ if (!$_COOKIE["loggedin"] == 1) {
 }
 
 ?>
-<?php
-if (isset($_GET["product"])) {
-    include "config/dbcon.php";
-    $pid = mysqli_real_escape_string($conn, $_GET["product"]);
-    $sql = "SELECT * FROM products WHERE product_id = '$pid'";
-    $result = mysqli_query($conn, $sql);
-    if (mysqli_num_rows($result) > 0) {
-        $product = mysqli_fetch_assoc($result);
-        // print_r($product);
-        // echo $product["product_img"];
-        $product_json = json_encode($product);
-    } else {
-        echo "<script>window.location.href = 'index.php';</script>";
-    }
-    //echo $product_json;
-    //echo $product["product_id"];
-} else {
-    echo "<script>window.location.href = 'index.php';</script>";
-}
-?>
+
 <!DOCTYPE html>
 <html>
 
@@ -86,25 +67,8 @@ if (isset($_GET["product"])) {
                     </ul>
                 </div> -->
     </header>
-    <h2 id="test_elm"></h2>
-    <section class="container">
-        <a href="cart.php" id="cart-avatar" class="cart-avatar"><i class="fa fa-shopping-cart"></i></a>
-        <div class="img-part">
-            <img src="<?php echo $product["product_img"]; ?>" alt="" />
-        </div>
-        <div class="primary-info">
-            <h2><?php echo $product["product_name"]; ?></h2>
-            <div class="stocks">
-                <h5><?php echo $product["price"]; ?>/=</h5>
-                <h4>In stock: <span><?php echo $product["stock"]; ?></span></h4>
-            </div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate</p>
-        </div>
-        <div class="buttons">
-            <button id="buyBtn" class="btn btn-success">Buy Now</button>
-            <button id="cartBtn" class="btn btn-primary">Add To Cart</button>
-        </div>
-    </section>
+
+
     <!--Top Navigation Bar End-->
     <footer id="footer-sec">
         <section id="footer">
@@ -145,28 +109,6 @@ if (isset($_GET["product"])) {
             </p>
         </section>
     </footer>
-    <!-- <h2 id="test_elm"></h2> -->
-    <script type="text/javascript">
-        const cartBtn = document.getElementById("cartBtn");
-        const test_elm = document.getElementById("test_elm")
-        var json_product = <?php echo $product_json; ?>;
-
-        cartBtn.onclick = function() {
-            console.log("clicked");
-            let jsonProductString = JSON.stringify(json_product);
-            //test_elm.innerHTML = jsonProductString;
-            let xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function() {
-                if (this.readyState == 4 && this.status == 200) {
-                    test_elm.style.display = "block";
-                    test_elm.innerHTML = "Product added to cart";
-                }
-            }
-            xhr.open("POST", "addcart.php", true);
-            xhr.setRequestHeader("Content-type", "application/json");
-            xhr.send(jsonProductString);
-        }
-    </script>
     <script>
         function home() {
             window.location.href = "index.php";
