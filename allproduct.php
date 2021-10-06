@@ -38,6 +38,48 @@ if (!$_COOKIE["loggedin"] == 1) {
             font-weight: 300;
             display: none;
         }
+
+        #sec {
+            margin-top: 10px;
+            width: 100%;
+        }
+
+        #sec .item {
+            height: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 5px;
+            padding: 5px;
+        }
+
+        #sec .item * {
+            margin-top: 5px;
+        }
+
+        #sec .item img {
+            width: 60%;
+        }
+
+        #sec .item h2 {
+            font-weight: 500;
+        }
+
+        #sec .item h4 {
+            font-weight: 500;
+        }
+
+        #sec .item h4 span {
+            font-weight: 500;
+            color: #ff5600;
+        }
+
+        #sec .item .btn {
+            width: 100%;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
     </style>
 </head>
 
@@ -68,6 +110,80 @@ if (!$_COOKIE["loggedin"] == 1) {
                 </div> -->
     </header>
 
+    <section id="sec">
+        <div class="container">
+            <div class="row">
+
+                <div id="1" class="item col-md-3 text-center">
+                    <a id="link1" href="#"><img src="images/product5.jpg" alt="" /></a>
+                    <h2 id="pname">Wooden Table Watch</h2>
+                    <h4>Price: <span id="price">400</span>Tk</h4>
+                    <a id="carturl" class="btn btn-primary" href="#">Add To Cart</a>
+                </div>
+
+                <div id="2" class="item col-md-3 text-center">
+                    <a id="link1" href="#"><img src="images/product5.jpg" alt="" /></a>
+                    <h2 id="pname">Wooden Table Watch</h2>
+                    <h4>Price: <span id="price">400</span>Tk</h4>
+                    <a id="carturl" class="btn btn-primary" href="#">Add To Cart</a>
+                </div>
+
+                <div id="3" class="item col-md-3 text-center">
+                    <a id="link1" href="#"><img src="images/product5.jpg" alt="" /></a>
+                    <h2 id="pname">Wooden Table Watch</h2>
+                    <h4>Price: <span id="price">400</span>Tk</h4>
+                    <a id="carturl" class="btn btn-primary" href="#">Add To Cart</a>
+                </div>
+
+                <div id="4" class="item col-md-3 text-center">
+                    <a id="link1" href="#"><img src="images/product5.jpg" alt="" /></a>
+                    <h2 id="pname">Wooden Table Watch</h2>
+                    <h4>Price: <span id="price">400</span>Tk</h4>
+                    <a id="carturl" class="btn btn-primary" href="#">Add To Cart</a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="sec">
+        <div class="container">
+            <div class="row">
+
+                <div id="5" class="item col-md-3 text-center">
+                    <a id="link1" href="#"><img src="images/product5.jpg" alt="" /></a>
+                    <h2 id="pname">Wooden Table Watch</h2>
+                    <h4>Price: <span id="price">400</span>Tk</h4>
+                    <a id="carturl" class="btn btn-primary" href="#">Add To Cart</a>
+                </div>
+
+                <div id="6" class="item col-md-3 text-center">
+                    <a id="link1" href="#"><img src="images/product5.jpg" alt="" /></a>
+                    <h2 id="pname">Wooden Table Watch</h2>
+                    <h4>Price: <span id="price">400</span>Tk</h4>
+                    <a id="carturl" class="btn btn-primary" href="#">Add To Cart</a>
+                </div>
+
+                <div id="7" class="item col-md-3 text-center">
+                    <a id="link1" href="#"><img src="images/product5.jpg" alt="" /></a>
+                    <h2 id="pname">Wooden Table Watch</h2>
+                    <h4>Price: <span id="price">400</span>Tk</h4>
+                    <a id="carturl" class="btn btn-primary" href="#">Add To Cart</a>
+                </div>
+
+                <div id="8" class="item col-md-3 text-center">
+                    <a id="link1" href="#"><img src="images/product5.jpg" alt="" /></a>
+                    <h2 id="pname">Wooden Table Watch</h2>
+                    <h4>Price: <span id="price">400</span>Tk</h4>
+                    <a id="carturl" class="btn btn-primary" href="#">Add To Cart</a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <div style="margin-top: 10px;" class="text-center">
+        <button type="button" class="btn btn-danger">See More</button>
+    </div>
 
     <!--Top Navigation Bar End-->
     <footer id="footer-sec">
@@ -113,6 +229,22 @@ if (!$_COOKIE["loggedin"] == 1) {
         function home() {
             window.location.href = "index.php";
         }
+    </script>
+    <script>
+        function loadmore(offset) {
+            let xhr = new XMLHttpRequest();
+
+            xhr.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    //var products = JSON.parse(this.responseText);
+                    console.log(this.responseText);
+                }
+            }
+
+            xhr.open("GET", "loadmore.php?offset=" + offset, true);
+            xhr.send();
+        }
+        loadmore(8);
     </script>
 </body>
 
