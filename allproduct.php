@@ -110,79 +110,9 @@ if (!$_COOKIE["loggedin"] == 1) {
                 </div> -->
     </header>
 
-    <section id="sec">
-        <div class="container">
-            <div class="row">
 
-                <div id="1" class="item col-md-3 text-center">
-                    <a id="link1" href="#"><img src="images/product5.jpg" alt="" /></a>
-                    <h2 id="pname">Wooden Table Watch</h2>
-                    <h4>Price: <span id="price">400</span>Tk</h4>
-                    <a id="carturl" class="btn btn-primary" href="#">Add To Cart</a>
-                </div>
-
-                <div id="2" class="item col-md-3 text-center">
-                    <a id="link1" href="#"><img src="images/product5.jpg" alt="" /></a>
-                    <h2 id="pname">Wooden Table Watch</h2>
-                    <h4>Price: <span id="price">400</span>Tk</h4>
-                    <a id="carturl" class="btn btn-primary" href="#">Add To Cart</a>
-                </div>
-
-                <div id="3" class="item col-md-3 text-center">
-                    <a id="link1" href="#"><img src="images/product5.jpg" alt="" /></a>
-                    <h2 id="pname">Wooden Table Watch</h2>
-                    <h4>Price: <span id="price">400</span>Tk</h4>
-                    <a id="carturl" class="btn btn-primary" href="#">Add To Cart</a>
-                </div>
-
-                <div id="4" class="item col-md-3 text-center">
-                    <a id="link1" href="#"><img src="images/product5.jpg" alt="" /></a>
-                    <h2 id="pname">Wooden Table Watch</h2>
-                    <h4>Price: <span id="price">400</span>Tk</h4>
-                    <a id="carturl" class="btn btn-primary" href="#">Add To Cart</a>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <section id="sec">
-        <div class="container">
-            <div class="row">
-
-                <div id="5" class="item col-md-3 text-center">
-                    <a id="link1" href="#"><img src="images/product5.jpg" alt="" /></a>
-                    <h2 id="pname">Wooden Table Watch</h2>
-                    <h4>Price: <span id="price">400</span>Tk</h4>
-                    <a id="carturl" class="btn btn-primary" href="#">Add To Cart</a>
-                </div>
-
-                <div id="6" class="item col-md-3 text-center">
-                    <a id="link1" href="#"><img src="images/product5.jpg" alt="" /></a>
-                    <h2 id="pname">Wooden Table Watch</h2>
-                    <h4>Price: <span id="price">400</span>Tk</h4>
-                    <a id="carturl" class="btn btn-primary" href="#">Add To Cart</a>
-                </div>
-
-                <div id="7" class="item col-md-3 text-center">
-                    <a id="link1" href="#"><img src="images/product5.jpg" alt="" /></a>
-                    <h2 id="pname">Wooden Table Watch</h2>
-                    <h4>Price: <span id="price">400</span>Tk</h4>
-                    <a id="carturl" class="btn btn-primary" href="#">Add To Cart</a>
-                </div>
-
-                <div id="8" class="item col-md-3 text-center">
-                    <a id="link1" href="#"><img src="images/product5.jpg" alt="" /></a>
-                    <h2 id="pname">Wooden Table Watch</h2>
-                    <h4>Price: <span id="price">400</span>Tk</h4>
-                    <a id="carturl" class="btn btn-primary" href="#">Add To Cart</a>
-                </div>
-
-            </div>
-        </div>
-    </section>
     <div style="margin-top: 10px;" class="text-center">
-        <button type="button" class="btn btn-danger">See More</button>
+        <button type="button" class="btn btn-danger" id="loadBtn" onclick="loadmore(3)">See More</button>
     </div>
 
     <!--Top Navigation Bar End-->
@@ -243,8 +173,13 @@ if (!$_COOKIE["loggedin"] == 1) {
 
             xhr.open("GET", "loadmore.php?offset=" + offset, true);
             xhr.send();
+
+            return offset;
         }
-        loadmore(8);
+        loadmore(0);
+        // console.log(last);
+        var loadBtn = document.getElementById("loadBtn");
+        loadBtn.onclick = loadmore(3);
     </script>
 </body>
 
