@@ -35,6 +35,7 @@ if (!$_COOKIE["loggedin"] == 1) {
         }
 
         .msg-sec {
+            z-index: 10;
             background-color: rgba(0, 0, 255, .2);
             display: none;
             justify-content: center;

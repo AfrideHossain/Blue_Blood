@@ -6,7 +6,7 @@ if (!$_COOKIE["loggedin"] == 1) {
 } else {
     $_SESSION["user_id"] = $_COOKIE["user_id"];
     $_SESSION["loggedin"] = 1;
-    setcookie("cart[]", "", time()+86400, "/");
+    setcookie("cart[]", "", time() + 86400, "/");
 }
 
 ?>
@@ -70,6 +70,7 @@ if (mysqli_num_rows($result) > 0) {
         <div id="side-menu" class="side-menu">
             <ul>
                 <li><a href="">Home</a></li>
+                <li><a href="allproduct.php">All Products</a></li>
                 <li><a href="">About Us</a></li>
                 <li><a href="">Contact Us</a></li>
                 <li><a href="">FAQ</a></li>

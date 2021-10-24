@@ -20,7 +20,7 @@ function input_tester($data)
     return $data;
 }
 $offset = Input_tester($_GET["offset"]);
-$sql = "SELECT * FROM products LIMIT $offset, 2";
+$sql = "SELECT * FROM products LIMIT $offset, 5";
 $all_product = [];
 $result = mysqli_query($conn, $sql);
 if (mysqli_num_rows($result) > 0) {

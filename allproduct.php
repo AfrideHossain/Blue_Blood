@@ -39,46 +39,69 @@ if (!$_COOKIE["loggedin"] == 1) {
             display: none;
         }
 
-        #sec {
+        .container {
             margin-top: 10px;
-            width: 100%;
         }
 
-        #sec .item {
+        .item {
+            width: 400px;
             height: auto;
             display: flex;
-            flex-direction: column;
             align-items: center;
-            justify-content: space-between;
+            /* justify-content: space-around; */
+            text-decoration: none;
+            margin: 5px auto;
+            padding: 5px 10px;
+            color: #000;
+            border: 1px solid #723D79;
+            border-radius: 5px;
+        }
+
+        .item:hover {
+            text-decoration: none;
+            color: initial;
+        }
+
+        .item * {
             margin-top: 5px;
-            padding: 5px;
         }
 
-        #sec .item * {
-            margin-top: 5px;
+        .item img {
+            width: 100px;
+            margin: 0 5px;
         }
 
-        #sec .item img {
-            width: 60%;
+        .item .texts {
+            width: 100%;
+            margin: 0 10px;
         }
 
-        #sec .item h2 {
+        .item h2 {
+            font-size: 1.2em;
             font-weight: 500;
         }
 
-        #sec .item h4 {
-            font-weight: 500;
+        .item h4 {
+            font-size: 1em;
+            font-style: italic;
+            font-weight: 300;
         }
 
-        #sec .item h4 span {
+        .item h4 span {
             font-weight: 500;
             color: #ff5600;
         }
 
-        #sec .item .btn {
+        .item .btn {
             width: 100%;
             font-weight: 500;
             text-transform: uppercase;
+        }
+
+        @media only screen and (max-width: 600px) {
+            .item {
+                width: 100%;
+            }
         }
     </style>
 </head>
@@ -109,10 +132,18 @@ if (!$_COOKIE["loggedin"] == 1) {
                     </ul>
                 </div> -->
     </header>
-
+    <section class="container" id="theBox">
+        <!-- <a href="" class="item">
+            <img src="images/product5.jpg" alt="">
+            <div class="texts">
+                <h2>Wooden Table Watch</h2>
+                <h4>Price: <span>400</span>Tk</h4>
+            </div>
+        </a> -->
+    </section>
 
     <div style="margin-top: 10px;" class="text-center">
-        <button type="button" class="btn btn-danger" id="loadBtn" onclick="loadmore(3)">See More</button>
+        <button type="button" class="btn btn-danger" id="loadBtn" onclick="loadmore()">See More</button>
     </div>
 
     <!--Top Navigation Bar End-->
@@ -161,25 +192,39 @@ if (!$_COOKIE["loggedin"] == 1) {
         }
     </script>
     <script>
-        function loadmore(offset) {
+        var offset = 0;
+        const theBox = document.getElementById("theBox");
+
+        function loadmore() {
             let xhr = new XMLHttpRequest();
 
             xhr.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
-                    //var products = JSON.parse(this.responseText);
-                    console.log(this.responseText);
+                    var products = JSON.parse(this.responseText);
+                    // console.log(products);
+                    let theHtml = "";
+                    for (let i = 0; i < products.length; i++) {
+                        theHtml += "<a href='details.php?product=" + products[i].product_id + "' class='item'>" +
+                            "<img src='" + products[i].product_img + "' alt=''>" +
+                            "<div class='texts '>" +
+                            "<h2>" + products[i].product_name + "</h2>" +
+                            "<h4>Price: <span>" + products[i].price + "</span>Tk</h4>" +
+                            "</div> </a>";
+                        // theBox.innerHTML = theHtml;
+                    }
+                    theBox.innerHTML += theHtml;
+                    offset += 5;
                 }
             }
 
             xhr.open("GET", "loadmore.php?offset=" + offset, true);
             xhr.send();
 
-            return offset;
         }
-        loadmore(0);
+        loadmore();
         // console.log(last);
-        var loadBtn = document.getElementById("loadBtn");
-        loadBtn.onclick = loadmore(3);
+        // var loadBtn = document.getElementById("loadBtn");
+        // loadBtn.onclick = loadmore(3);
     </script>
 </body>
 
